@@ -13,8 +13,20 @@ docker run --rm cgi-grader --question 1 --lang python
 ```
 
 **Or use the helper script:**
+
+Linux/macOS:
 ```bash
 ./run-grader.sh 1 python
+```
+
+Windows (Command Prompt):
+```cmd
+run-grader.bat 1 python
+```
+
+Windows (PowerShell):
+```powershell
+.\run-grader.ps1 1 python
 ```
 
 ## Example Output
