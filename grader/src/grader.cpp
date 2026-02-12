@@ -5,14 +5,15 @@
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>
-#include <fstream>
+#include <cstring>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
 namespace {
 
-// Trim whitespace from both ends of a string
+// remove whitespace from string
 std::string trim(const std::string& str) {
     size_t start = 0;
     while (start < str.size() && std::isspace(static_cast<unsigned char>(str[start]))) {
@@ -27,7 +28,7 @@ std::string trim(const std::string& str) {
     return str.substr(start, end - start);
 }
 
-// Execute a shell command and capture its output
+// run shell command & return output
 std::string run_command(const std::string& command) {
     std::array<char, 256> buffer;
     std::string output;
@@ -45,89 +46,133 @@ std::string run_command(const std::string& command) {
     return output;
 }
 
-// Detect available Python command (python3, python, or py)
+// try different python commands
 std::string detect_python() {
-    // Try python3 first (Linux/macOS standard)
     if (!run_command("python3 --version 2>&1").empty()) {
         return "python3";
     }
     
-    // Try python (common alias)
     if (!run_command("python --version 2>&1").empty()) {
         return "python";
     }
-    
-    // Try py (Windows launcher)
+
     if (!run_command("py --version 2>&1").empty()) {
         return "py";
     }
     
-    return ""; // Not found
+    return "";
 }
 
-// Run a test case by piping input to Python script
+// run test case - pipe input to python script
 std::string run_test(const std::string& python_cmd, const std::string& script_path, const std::string& input) {
     const std::string temp_file = "temp_input.txt";
     
-    // Write input to temporary file
-    {
-        std::ofstream out(temp_file);
-        if (!out) {
-            std::cerr << "Error: Could not create temporary input file\n";
-            return "";
-        }
-        out << input;
-    } // File automatically closed here
+    FILE* temp = fopen(temp_file.c_str(), "w");
+    if (!temp) {
+        std::cerr << "Error: Could not create temporary input file\n";
+        return "";
+    }
+    fputs(input.c_str(), temp);
+    fclose(temp);
 
-    // Build command based on platform
-    std::string command;
-#ifdef _WIN32
-    command = "type " + temp_file + " | " + python_cmd + " " + script_path + " 2>&1";
-#else
-    command = "cat " + temp_file + " | " + python_cmd + " " + script_path + " 2>&1";
-#endif
+    std::string command = "cat " + temp_file + " | " + python_cmd + " " + script_path + " 2>&1";
 
     std::string output = run_command(command);
 
-    // Clean up temporary file
     std::remove(temp_file.c_str());
 
     return output;
 }
 
-} // anonymous namespace 
+} 
 
-void run_q1(const std::string& language) {
-    if (language != "python") {
-        std::cout << "Error: Only Python is supported for question 1.\n";
-        return;
+// TEST CASES FOR EACH QUESTIONS GO HERE
+std::vector<TestCase> get_question_tests(int question_number) {
+    switch (question_number) {
+        case 1: {
+            return {
+                {"1 2 3 4 5\n", "15"},
+                {"10 20 30\n", "60"},
+                {"0 0 0 0\n", "0"},
+                {"5\n", "5"},
+                {"-1 1\n", "0"}
+            };
+        }
+        case 2: {
+            return {};
+        }
+        case 3: {
+            return {};
+        }
+        case 4: {
+            return {};
+        }
+        case 5: {
+            return {};
+        }
+        case 6: {
+            return {};
+        }
+        case 7: {
+            return {};
+        }
+        case 8: {
+            return {};
+        }
+        case 9: {
+            return {};
+        }
+        case 10: {
+            return {};
+        }
+        default:
+            return {};
     }
+}
 
-    // Detect Python command
-    std::string python_cmd = detect_python();
-    if (python_cmd.empty()) {
-        std::cerr << "Error: Python not found. Please install Python and add it to PATH.\n";
-        return;
+bool run_question(int question_number, const std::string& language) {
+    if (question_number < 1 || question_number > 10) {
+        std::cerr << "Error: Question number must be between 1 and 10\n";
+        return false;
     }
+    
+    std::string solution_file;
+    std::string runtime_cmd;
+    
+    if (language == "python") {
+        std::ostringstream path;
+        path << "../questions/q" << question_number << "/solution.py";
+        solution_file = path.str();
+        
+        runtime_cmd = detect_python();
+        if (runtime_cmd.empty()) {
+            std::cerr << "Error: Python not found. Please install Python and add it to PATH.\n";
+            return false;
+        }
+    } else if (language == "java") {
+        std::cerr << "Error: Java support not yet implemented.\n";
+        return false;
+    } else {
+        std::cerr << "Error: Unsupported language: " << language << "\n";
+        return false;
+    }
+    
+    std::vector<TestCase> tests = get_question_tests(question_number);
+    if (tests.empty()) {
+        std::cerr << "Error: No test cases defined for question " << question_number << "\n";
+        return false;
+    }
+    
 
-    // Define test cases
-    const std::vector<TestCase> tests = {
-        {"1 2 3 4 5\n", "15"},
-        {"10 20 30\n", "60"},
-        {"0 0 0 0\n", "0"},
-        {"5\n", "5"},
-        {"-1 1\n", "0"}
-    };
-
-    std::cout << "\nQuestion 1 - Array Sum\n";
-    std::cout << "======================\n\n";
-
+    std::cout << "\nQuestion " << question_number << " (" << language << ")\n";
+    std::cout << "==============================\n\n";
+    
     int passed = 0;
     for (size_t i = 0; i < tests.size(); ++i) {
         const TestCase& test = tests[i];
-        std::string output = trim(run_test(python_cmd, "../questions/q1/solution.py", test.input));
+        std::string output = trim(run_test(runtime_cmd, solution_file, test.input));
         std::string expected = trim(test.expected_output);
-
+        
         if (output == expected) {
             ++passed;
             std::cout << "Test " << (i + 1) << ": PASS\n";
@@ -136,6 +181,7 @@ void run_q1(const std::string& language) {
                       << expected << ", got " << output << ")\n";
         }
     }
-
+    
     std::cout << "\nScore: " << passed << "/" << tests.size() << "\n";
+    return true;
 }

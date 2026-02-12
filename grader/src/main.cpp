@@ -6,11 +6,6 @@
 
 void print_usage() {
     std::cout << "Usage: ./grader --question <number> --lang <python|java>\n";
-    std::cout << "\nOptions:\n";
-    std::cout << "  --question <number>  Question number (1-10)\n";
-    std::cout << "  --lang <language>    Programming language (python or java)\n";
-    std::cout << "\nExample:\n";
-    std::cout << "  ./grader --question 1 --lang python\n";
 }
 
 int main(int argc, char* argv[]) {
@@ -56,14 +51,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Route to appropriate question handler
-    switch (question_number) {
-        case 1:
-            run_q1(language);
-            break;
-        default:
-            std::cerr << "Error: Question " << question_number << " not implemented yet\n";
-            return 1;
+    // Run the question
+    if (!run_question(question_number, language)) {
+        return 1;
     }
 
     return 0;

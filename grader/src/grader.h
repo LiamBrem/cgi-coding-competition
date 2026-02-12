@@ -2,7 +2,12 @@
 #define GRADER_H
 
 #include <string>
+#include <vector>
+#include <unordered_map>
+#include "test_case.h"
 
-void run_q1(const std::string& language);
+std::vector<TestCase> get_question_tests(int question_number);
 
-#endif // GRADER_H
+bool run_question(int question_number, const std::string& language);
+
+#endif 
