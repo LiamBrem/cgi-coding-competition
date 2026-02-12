@@ -1,4 +1,3 @@
-
 #ifndef GRADER_H
 #define GRADER_H
 
@@ -6,4 +5,4 @@
 
 void run_q1(const std::string& language);
 
-#endif
+#endif // GRADER_H

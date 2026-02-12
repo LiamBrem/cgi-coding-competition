@@ -1,2 +1,6 @@
 *.class
 .vscode
+grader/build
+grader/grader
+grader/grader.exe
+temp_input.txt

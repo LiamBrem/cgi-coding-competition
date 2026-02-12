@@ -1,0 +1,6 @@
+.git
+.vscode
+grader/build
+grader/grader
+grader/grader.exe
+*.class

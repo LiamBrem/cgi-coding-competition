@@ -1,10 +1,10 @@
-
 #include "grader.h"
 #include "test_case.h"
 
 #include <array>
 #include <cctype>
 #include <cstdio>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -12,101 +12,130 @@
 
 namespace {
 
-std::string trim(const std::string& value) {
-	size_t start = 0;
-	while (start < value.size() && std::isspace(static_cast<unsigned char>(value[start]))) {
-		++start;
-	}
+// Trim whitespace from both ends of a string
+std::string trim(const std::string& str) {
+    size_t start = 0;
+    while (start < str.size() && std::isspace(static_cast<unsigned char>(str[start]))) {
+        ++start;
+    }
 
-	size_t end = value.size();
-	while (end > start && std::isspace(static_cast<unsigned char>(value[end - 1]))) {
-		--end;
-	}
+    size_t end = str.size();
+    while (end > start && std::isspace(static_cast<unsigned char>(str[end - 1]))) {
+        --end;
+    }
 
-	return value.substr(start, end - start);
+    return str.substr(start, end - start);
 }
 
+// Execute a shell command and capture its output
 std::string run_command(const std::string& command) {
-	std::array<char, 256> buffer{};
-	std::string output;
-	FILE* pipe = popen(command.c_str(), "r");
-	if (!pipe) {
-		return "";
-	}
+    std::array<char, 256> buffer;
+    std::string output;
+    
+    FILE* pipe = popen(command.c_str(), "r");
+    if (!pipe) {
+        return "";
+    }
 
-	while (fgets(buffer.data(), static_cast<int>(buffer.size()), pipe)) {
-		output += buffer.data();
-	}
+    while (fgets(buffer.data(), buffer.size(), pipe) != nullptr) {
+        output += buffer.data();
+    }
 
-	pclose(pipe);
-	return output;
+    pclose(pipe);
+    return output;
 }
 
+// Detect available Python command (python3, python, or py)
+std::string detect_python() {
+    // Try python3 first (Linux/macOS standard)
+    if (!run_command("python3 --version 2>&1").empty()) {
+        return "python3";
+    }
+    
+    // Try python (common alias)
+    if (!run_command("python --version 2>&1").empty()) {
+        return "python";
+    }
+    
+    // Try py (Windows launcher)
+    if (!run_command("py --version 2>&1").empty()) {
+        return "py";
+    }
+    
+    return ""; // Not found
+}
+
+// Run a test case by piping input to Python script
 std::string run_test(const std::string& python_cmd, const std::string& script_path, const std::string& input) {
-	// Write input to temporary file
-	const std::string temp_file = "temp_input.txt";
-	std::ofstream out(temp_file);
-	if (!out) {
-		return "";
-	}
-	out << input;
-	out.close();
+    const std::string temp_file = "temp_input.txt";
+    
+    // Write input to temporary file
+    {
+        std::ofstream out(temp_file);
+        if (!out) {
+            std::cerr << "Error: Could not create temporary input file\n";
+            return "";
+        }
+        out << input;
+    } // File automatically closed here
 
-	// Run python with input redirection - use type on Windows, cat on Unix
-	std::string command;
+    // Build command based on platform
+    std::string command;
 #ifdef _WIN32
-	command = "type " + temp_file + " | " + python_cmd + " " + script_path;
+    command = "type " + temp_file + " | " + python_cmd + " " + script_path + " 2>&1";
 #else
-	command = "cat " + temp_file + " | " + python_cmd + " " + script_path;
+    command = "cat " + temp_file + " | " + python_cmd + " " + script_path + " 2>&1";
 #endif
-	std::string output = run_command(command);
 
-	// Clean up temp file
-	std::remove(temp_file.c_str());
+    std::string output = run_command(command);
 
-	return output;
+    // Clean up temporary file
+    std::remove(temp_file.c_str());
+
+    return output;
 }
 
-} 
+} // anonymous namespace 
 
 void run_q1(const std::string& language) {
-	if (language != "python") {
-		std::cout << "Only python is supported for now.\n";
-		return;
-	}
+    if (language != "python") {
+        std::cout << "Error: Only Python is supported for question 1.\n";
+        return;
+    }
 
-	// Detect Python command - try python3, python, py (Windows launcher)
-	std::string python_cmd;
-	if (!run_command("python3 --version 2>&1").empty()) {
-		python_cmd = "python3";
-	} else if (!run_command("python --version 2>&1").empty()) {
-		python_cmd = "python";
-	} else if (!run_command("py --version 2>&1").empty()) {
-		python_cmd = "py";
-	} else {
-		std::cout << "Error: Python not found. Please install Python and add it to PATH.\n";
-		return;
-	}
+    // Detect Python command
+    std::string python_cmd = detect_python();
+    if (python_cmd.empty()) {
+        std::cerr << "Error: Python not found. Please install Python and add it to PATH.\n";
+        return;
+    }
 
-	std::vector<TestCase> tests = {
-		{"1 2 3 4 5\n", "15"},
-		{"10 20 30\n", "60"},
-		{"0 0 0 0\n", "0"}
-	};
+    // Define test cases
+    const std::vector<TestCase> tests = {
+        {"1 2 3 4 5\n", "15"},
+        {"10 20 30\n", "60"},
+        {"0 0 0 0\n", "0"},
+        {"5\n", "5"},
+        {"-1 1\n", "0"}
+    };
 
-	int passed = 0;
-	for (size_t i = 0; i < tests.size(); ++i) {
-		const TestCase& test = tests[i];
-		std::string output = trim(run_test(python_cmd, "../questions/q1/solution.py", test.input));
+    std::cout << "\nQuestion 1 - Array Sum\n";
+    std::cout << "======================\n\n";
 
-		if (output == trim(test.expected_output)) {
-			++passed;
-			std::cout << "Test " << (i + 1) << ": PASS\n";
-		} else {
-			std::cout << "Test " << (i + 1) << ": FAIL (expected "
-					  << test.expected_output << ", got " << output << ")\n";
-		}
-	}
+    int passed = 0;
+    for (size_t i = 0; i < tests.size(); ++i) {
+        const TestCase& test = tests[i];
+        std::string output = trim(run_test(python_cmd, "../questions/q1/solution.py", test.input));
+        std::string expected = trim(test.expected_output);
 
-	std::cout << "Score: " << passed << "/" << tests.size() << "\n";
+        if (output == expected) {
+            ++passed;
+            std::cout << "Test " << (i + 1) << ": PASS\n";
+        } else {
+            std::cout << "Test " << (i + 1) << ": FAIL (expected "
+                      << expected << ", got " << output << ")\n";
+        }
+    }
+
+    std::cout << "\nScore: " << passed << "/" << tests.size() << "\n";
 }
