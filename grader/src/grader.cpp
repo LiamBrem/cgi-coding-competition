@@ -52,8 +52,13 @@ std::string run_test(const std::string& python_cmd, const std::string& script_pa
 	out << input;
 	out.close();
 
-	// Run python with input redirection
-	std::string command = python_cmd + " " + script_path + " < " + temp_file;
+	// Run python with input redirection - use type on Windows, cat on Unix
+	std::string command;
+#ifdef _WIN32
+	command = "type " + temp_file + " | " + python_cmd + " " + script_path;
+#else
+	command = "cat " + temp_file + " | " + python_cmd + " " + script_path;
+#endif
 	std::string output = run_command(command);
 
 	// Clean up temp file
@@ -70,10 +75,17 @@ void run_q1(const std::string& language) {
 		return;
 	}
 
-	// Detect Python command (python3 on Unix, python on Windows typically)
-	std::string python_cmd = "python3";
-	if (run_command("python3 --version 2>&1").empty()) {
+	// Detect Python command - try python3, python, py (Windows launcher)
+	std::string python_cmd;
+	if (!run_command("python3 --version 2>&1").empty()) {
+		python_cmd = "python3";
+	} else if (!run_command("python --version 2>&1").empty()) {
 		python_cmd = "python";
+	} else if (!run_command("py --version 2>&1").empty()) {
+		python_cmd = "py";
+	} else {
+		std::cout << "Error: Python not found. Please install Python and add it to PATH.\n";
+		return;
 	}
 
 	std::vector<TestCase> tests = {
