@@ -99,7 +99,9 @@ std::vector<TestCase> get_question_tests(int question_number) {
             };
         }
         case 2: {
-            return {};
+            return {
+                {"asasfjkjcgiasdfjsfasfscgiasdfajsakjcgiajjjjcgiasdfCgIja;scgi\n", "6"},
+            };
         }
         case 3: {
             return {};

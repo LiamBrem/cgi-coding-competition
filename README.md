@@ -2,6 +2,8 @@
 
 ## Running with Docker
 
+> if you don't have docker install it [here](https://docs.docker.com/get-started/get-docker/)
+
 **Build the image:**
 ```bash
 docker build -t cgi-grader .
