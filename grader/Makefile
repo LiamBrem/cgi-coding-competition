@@ -22,7 +22,7 @@ $(TARGET): $(OBJS)
 windows: $(MINGW_TARGET)
 
 $(MINGW_TARGET): $(MINGW_OBJS)
-	$(MINGW_CXX) $(CXXFLAGS) -o $(MINGW_TARGET) $(MINGW_OBJS) -static-libgcc -static-libstdc++
+	$(MINGW_CXX) $(CXXFLAGS) -o $(MINGW_TARGET) $(MINGW_OBJS) -static
 
 %.win.o: %.cpp
 	$(MINGW_CXX) $(CXXFLAGS) -c $< -o $@
