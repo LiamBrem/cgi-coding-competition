@@ -49,7 +49,7 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 7:
     {
-        return {};
+        return {{"N[3,7,11](N[1,2](L[1])(L[1]))(L[2])", "0"}};
     }
     case 8:
     {
