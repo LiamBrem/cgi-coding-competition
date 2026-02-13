@@ -3,7 +3,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET = grader
 BUILD_DIR = build
 SRC_DIR = src
-SRCS = $(SRC_DIR)/main.cpp $(SRC_DIR)/grader.cpp
+SRCS = $(SRC_DIR)/main.cpp $(SRC_DIR)/grader.cpp $(SRC_DIR)/question_tests.cpp
 OBJS = $(SRCS:$(SRC_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 
 # Cross-compilation for Windows
