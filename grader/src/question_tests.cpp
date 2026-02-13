@@ -38,7 +38,10 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 5:
     {
-        return {};
+        return {
+            {"abcijicba", "1"},
+            {"aasdfve", "0"}
+        };
     }
     case 6:
     {
