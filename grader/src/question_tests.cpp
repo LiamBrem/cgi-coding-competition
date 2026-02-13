@@ -33,7 +33,8 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 4:
     {
-        return {};
+        return {{"aaaaaaaagjjjjjgjjj", "g"},
+                {"qwerdtyuiopzxcvbnmdlkj", "d"}};
     }
     case 5:
     {
