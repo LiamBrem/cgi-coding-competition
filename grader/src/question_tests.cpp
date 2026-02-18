@@ -57,7 +57,9 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 9:
     {
-        return {};
+        return {
+            {"2\n1 3 5\n2 4 6", "1 2 3 4 5 6"}
+        };
     }
     case 10:
     {
