@@ -1,4 +1,4 @@
-package questions.q2;
+package q2;
 
 public class Solution {
     

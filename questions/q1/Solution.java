@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class givenCode {
+public class Solution {
     public static void main(String[] args) {
         // open input.txt for reading
         Path inputPath = Paths.get("input.txt");

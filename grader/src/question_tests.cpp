@@ -44,7 +44,7 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 6:
     {
-        return {};
+        return {{"152", "1"}};
     }
     case 7:
     {
