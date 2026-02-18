@@ -63,7 +63,7 @@ std::vector<TestCase> get_question_tests(int question_number)
     }
     case 10:
     {
-        return {};
+        return {{"3 2 5 10 7", "15"}};
     }
     default:
         return {};
