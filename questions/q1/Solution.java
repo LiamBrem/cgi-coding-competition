@@ -1,24 +1,50 @@
 package q1;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.*;
+
+// ============================================
+// IMPLEMENT YOUR SOLUTION IN THE solve() METHOD
+// ============================================
 
 public class Solution {
-    public static void main(String[] args) {
-        // open input.txt for reading
-        Path inputPath = Paths.get("input.txt");
-
-        try (BufferedReader br = Files.newBufferedReader(inputPath)) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                int value = Integer.parseInt(line.trim()); // int value of each lien
-
-            }
-        } catch (IOException e) {
-            System.err.println("Failed to read input: " + e.getMessage());
+    /**
+     * Calculate the sum of all transaction values.
+     * 
+     * @param inputList An array of integers representing transaction values
+     * 
+     * Your solution should print the result to stdout using System.out.println()
+     */
+    public static void solve(int[] inputList) {
+        // ============================================
+        // YOUR CODE HERE
+        // ============================================
+        
+        int sum = 0;
+        for (int num : inputList) {
+            sum += num;
         }
+        
+        System.out.println(sum);
+        
+        // ============================================
+        // END YOUR CODE
+        // ============================================
+    }
+    
+    // ============================================
+    // DO NOT MODIFY BELOW THIS LINE
+    // ============================================
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        String[] parts = line.trim().split("\\s+");
+        
+        int[] numbers = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            numbers[i] = Integer.parseInt(parts[i]);
+        }
+        
+        solve(numbers);
+        scanner.close();
     }
 }

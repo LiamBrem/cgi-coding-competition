@@ -1,10 +1,14 @@
 FROM python:3.11-slim
 
-# Install C++ compiler for grader
+# Install C++ compiler for grader and Java JDK
 RUN apt-get update && apt-get install -y \
     g++ \
     make \
+    default-jdk \
     && rm -rf /var/lib/apt/lists/*
+
+# Verify Java installation
+RUN java -version && javac -version
 
 # Set working directory
 WORKDIR /app

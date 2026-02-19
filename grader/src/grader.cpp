@@ -74,8 +74,32 @@ namespace
         return "";
     }
 
+    // check if java is available
+    bool detect_java()
+    {
+        return !run_command("javac -version 2>&1").empty() && 
+               !run_command("java -version 2>&1").empty();
+    }
+
+    // compile java file
+    bool compile_java(const std::string &java_file)
+    {
+        std::string compile_cmd = "javac " + java_file + " 2>&1";
+        std::string output = run_command(compile_cmd);
+        
+        // If output contains "error", compilation failed
+        if (output.find("error") != std::string::npos || 
+            output.find("Error") != std::string::npos)
+        {
+            std::cerr << "Compilation error:\n" << output << "\n";
+            return false;
+        }
+        
+        return true;
+    }
+
     // run test case - pipe input to python script
-    std::string run_test(const std::string &python_cmd, const std::string &script_path, const std::string &input)
+    std::string run_test_python(const std::string &python_cmd, const std::string &script_path, const std::string &input)
     {
         const std::string temp_file = "temp_input.txt";
 
@@ -97,6 +121,30 @@ namespace
         return output;
     }
 
+    // run test case - pipe input to java program
+    std::string run_test_java(const std::string &class_name, const std::string &input)
+    {
+        const std::string temp_file = "temp_input.txt";
+
+        FILE *temp = fopen(temp_file.c_str(), "w");
+        if (!temp)
+        {
+            std::cerr << "Error: Could not create temporary input file\n";
+            return "";
+        }
+        fputs(input.c_str(), temp);
+        fclose(temp);
+
+        // Run with classpath pointing to questions directory
+        std::string command = "cat " + temp_file + " | java -cp ../questions " + class_name + " 2>&1";
+
+        std::string output = run_command(command);
+
+        std::remove(temp_file.c_str());
+
+        return output;
+    }
+
 }
 
 bool run_question(int question_number, const std::string &language)
@@ -109,6 +157,7 @@ bool run_question(int question_number, const std::string &language)
 
     std::string solution_file;
     std::string runtime_cmd;
+    std::string class_name;
 
     if (language == "python")
     {
@@ -125,8 +174,29 @@ bool run_question(int question_number, const std::string &language)
     }
     else if (language == "java")
     {
-        std::cerr << "Error: Java support not yet implemented.\n";
-        return false;
+        if (!detect_java())
+        {
+            std::cerr << "Error: Java not found. Please install JDK and add javac/java to PATH.\n";
+            return false;
+        }
+
+        std::ostringstream path;
+        path << "../questions/q" << question_number << "/Solution.java";
+        solution_file = path.str();
+
+        // Compile the Java file
+        std::cout << "Compiling Java solution...\n";
+        if (!compile_java(solution_file))
+        {
+            std::cerr << "Error: Compilation failed for " << solution_file << "\n";
+            return false;
+        }
+        std::cout << "Compilation successful!\n\n";
+
+        // Class name is q<number>.Solution
+        std::ostringstream cn;
+        cn << "q" << question_number << ".Solution";
+        class_name = cn.str();
     }
     else
     {
@@ -141,14 +211,24 @@ bool run_question(int question_number, const std::string &language)
         return false;
     }
 
-    std::cout << "\nQuestion " << question_number << " (" << language << ")\n";
+    std::cout << "Question " << question_number << " (" << language << ")\n";
     std::cout << "==============================\n\n";
 
     int passed = 0;
     for (size_t i = 0; i < tests.size(); ++i)
     {
         const TestCase &test = tests[i];
-        std::string output = trim(run_test(runtime_cmd, solution_file, test.input));
+        std::string output;
+        
+        if (language == "python")
+        {
+            output = trim(run_test_python(runtime_cmd, solution_file, test.input));
+        }
+        else if (language == "java")
+        {
+            output = trim(run_test_java(class_name, test.input));
+        }
+        
         std::string expected = trim(test.expected_output);
 
         if (output == expected)
