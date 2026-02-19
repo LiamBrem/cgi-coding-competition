@@ -72,9 +72,12 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(grid)` function receives:
-- `grid`: A Python 2D list (list of lists) where each element is a string '0' or '1' (e.g., `[['1','1','0'], ['0','1','0'], ['0','0','1']]`)
+**Python:** Your `main(grid)` function receives:
+- `grid`: A 2D list (list of lists) where each element is a string `'0'` or `'1'`
+  - Example: `[['1','1','0'], ['0','1','0'], ['0','0','1']]`
+  - Note: Grid elements are strings, not integers!
+- Print using: `print()`
 
-Note: Grid elements are strings, not integers!
-
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(grid)` method receives:
+- `grid`: A `char[][]` 2D array where each element is `'0'` or `'1'`
+- Print using: `System.out.println()`

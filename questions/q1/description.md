@@ -32,7 +32,10 @@ Output: 150
 
 ## Function Parameters
 
-Your `main(input_list)` function receives:
-- `input_list`: A Python list of integers (e.g., `[1, 2, 3, 4, 5]`)
+**Python:** Your `main(input_list)` function receives:
+- `input_list`: A list of integers (e.g., `[1, 2, 3, 4, 5]`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(inputList)` method receives:
+- `inputList`: An `int[]` array of integers
+- Print using: `System.out.println()`

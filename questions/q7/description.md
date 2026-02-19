@@ -62,12 +62,18 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(root)` function receives:
+**Python:** Your `main(root)` function receives:
 - `root`: A TreeNode object with:
   - `root.val`: A list of integers
   - `root.children`: A list of TreeNode children
   - `root.evaluate()`: A method that computes the node's value (already implemented)
+- The TreeNode class is already provided in the starter code
+- Print using: `print()`
 
-The TreeNode class is already provided in the starter code with helper functions to parse the input.
-
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(root)` method receives:
+- `root`: A TreeNode object with:
+  - `root.val`: A `List<Integer>` of integers
+  - `root.children`: A `List<TreeNode>` of children
+  - `root.evaluate()`: A method that computes the node's value (already implemented)
+- The TreeNode class and parsing helpers are already provided
+- Print using: `System.out.println()`

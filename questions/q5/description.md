@@ -53,7 +53,10 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(input_string)` function receives:
-- `input_string`: A Python string with length divisible by 3 (e.g., `"abccba"`)
+**Python:** Your `main(input_string)` function receives:
+- `input_string`: A string with length divisible by 3 (e.g., `"abccba"`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(inputString)` method receives:
+- `inputString`: A `String` with length divisible by 3
+- Print using: `System.out.println()`

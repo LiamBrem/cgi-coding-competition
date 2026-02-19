@@ -49,7 +49,10 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(input_string)` function receives:
-- `input_string`: A Python string of even length (e.g., `"abcdcefg"`)
+**Python:** Your `main(input_string)` function receives:
+- `input_string`: A string with even length (e.g., `"abcdcefg"`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`. 
+**Java:** Your `solve(inputString)` method receives:
+- `inputString`: A `String` with even length
+- Print using: `System.out.println()`

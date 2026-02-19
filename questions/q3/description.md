@@ -66,8 +66,12 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(guide, moves)` function receives:
-- `guide`: A Python list of 6 strings representing 3 pairs of [opponent_move, your_response] (e.g., `["R", "P", "P", "S", "S", "R"]`)
-- `moves`: A Python list of strings representing the opponent's move sequence (e.g., `["R", "P", "S"]`)
+**Python:** Your `main(guide, moves)` function receives:
+- `guide`: A list of 6 strings representing 3 pairs of [opponent_move, your_response] (e.g., `["R", "P", "P", "S", "S", "R"]`)
+- `moves`: A list of strings representing the opponent's move sequence (e.g., `["R", "P", "S"]`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(guide, moves)` method receives:
+- `guide`: A `String[]` array of 6 strings representing 3 pairs
+- `moves`: A `String[]` array representing the opponent's move sequence
+- Print using: `System.out.println()`

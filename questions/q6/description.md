@@ -59,7 +59,10 @@ Output: 0
 
 ## Function Parameters
 
-Your `main(nums)` function receives:
-- `nums`: A Python list of integers representing the project values (e.g., `[1, 5, 2]`)
+**Python:** Your `main(nums)` function receives:
+- `nums`: A list of integers representing the project values (e.g., `[1, 5, 2]`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(nums)` method receives:
+- `nums`: An `int[]` array representing the project values
+- Print using: `System.out.println()`

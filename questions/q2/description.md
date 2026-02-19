@@ -34,7 +34,10 @@ Explanation: Found "Cgi" = 1 occurrence.
 
 ## Function Parameters
 
-Your `main(input_string)` function receives:
-- `input_string`: A Python string containing the log data (e.g., `"cgiCGIcgi"`)
+**Python:** Your `main(input_string)` function receives:
+- `input_string`: A string containing the log data (e.g., `"cgiCGIcgi"`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(inputString)` method receives:
+- `inputString`: A `String` containing the log data
+- Print using: `System.out.println()`

@@ -48,7 +48,10 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(nums)` function receives:
-- `nums`: A Python list of integers representing task values (e.g., `[3, 2, 5, 10, 7]`)
+**Python:** Your `main(nums)` function receives:
+- `nums`: A list of integers representing task values (e.g., `[3, 2, 5, 10, 7]`)
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(nums)` method receives:
+- `nums`: An `int[]` array representing task values
+- Print using: `System.out.println()`

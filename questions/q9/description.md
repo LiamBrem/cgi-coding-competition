@@ -60,11 +60,13 @@ Explanation:
 
 ## Function Parameters
 
-Your `main(lines)` function receives:
-- `lines`: A Python list of strings where:
+**Python:** Your `main(lines)` function receives:
+- `lines`: A list of strings where:
   - `lines[0]`: String containing k (number of lists)
   - `lines[1]` to `lines[k]`: Strings containing space-separated integers (or empty strings)
-  
-Example: `['2', '1 3 5', '2 4 6']`
+  - Example: `['2', '1 3 5', '2 4 6']`
+- Print using: `print()`
 
-Your solution should print the result to stdout using `print()`.
+**Java:** Your `solve(lists)` method receives:
+- `lists`: A `List<List<Integer>>` where each element is a sorted list of integers
+- Print using: `System.out.println()`
