@@ -1,4 +1,4 @@
-# Question 8: Breach Cluster Detection
+# Question 8: Breach Cluster Detection - 40 Points
 
 Your system analysis revealed some concerning patterns. The security operations center has generated a map of the server infrastructure, and multiple servers show signs of compromise. Each "1" on the map represents a compromised server, while "0" represents a clean server.
 

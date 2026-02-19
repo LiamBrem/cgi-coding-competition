@@ -1,4 +1,4 @@
-# Question 1: Transaction Verification
+# Question 1: Transaction Verification - 5 Points
 
 You've just been recruited as a Junior Security Analyst at CGI. Your first assignment: a global client experienced a cyber incident that partially corrupted their transaction logs. Before digital transformation can continue, you must verify the total transaction values across all regions to confirm financial integrity.
 

@@ -1,4 +1,4 @@
-# Question 5: Triple Palindrome Validator
+# Question 5: Triple Palindrome Validator - 25 Points
 
 Fantastic work recovering that encryption key! The security team now needs your help with another encryption challenge. The system has an encryption validator that flags symmetrical keys as authentic based on a specific structural pattern.
 

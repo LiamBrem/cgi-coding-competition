@@ -1,4 +1,4 @@
-# Question 3: Rock, Paper, Scissors
+# Question 3: Rock, Paper, Scissors - 15 Points
 
 Excellent detective work on the signature detection! The attack patterns are becoming clearer. Analysis shows the cyber adversary uses a predictable response strategy when engaging with defensive systems...almost like a game of Rock-Paper-Scissors.
 

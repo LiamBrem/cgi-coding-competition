@@ -1,7 +1,26 @@
 import sys
 import heapq
 
+# ============================================
+# IMPLEMENT YOUR SOLUTION IN THE main() FUNCTION
+# ============================================
+
 def main(lines):
+    """
+    Merge k sorted lists into a single sorted list.
+    
+    Args:
+        lines: A list of strings where:
+               - lines[0]: String containing k (number of lists)
+               - lines[1] to lines[k]: Strings with space-separated integers
+                 (or empty strings for empty lists)
+    
+    Your solution should print the merged sorted list to stdout
+    """
+    # ============================================
+    # YOUR CODE HERE
+    # ============================================
+    
     k = int(lines[0])
     
     lists = []
@@ -29,7 +48,15 @@ def main(lines):
                 (lists[list_index][next_index], list_index, next_index))
 
     print(" ".join(map(str, result)))
+    
+    # ============================================
+    # END YOUR CODE
+    # ============================================
 
+
+# ============================================
+# DO NOT MODIFY BELOW THIS LINE
+# ============================================
 if __name__ == "__main__":
     input_string = sys.stdin.read()
     lines = input_string.strip().split("\n")

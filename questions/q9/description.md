@@ -1,4 +1,4 @@
-# Question 9: Global Log Merger
+# Question 9: Global Log Merger - 45 Points
 
 Your breach detection system is now helping response teams deploy effectively! But there's another operational challenge: CGI's 400 global locations each produce their own sorted incident logs throughout the day. 
 

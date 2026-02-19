@@ -1,4 +1,23 @@
+# ============================================
+# IMPLEMENT YOUR SOLUTION IN THE main() FUNCTION
+# ============================================
+
 def main(grid):
+    """
+    Count the number of islands in a 2D grid.
+    
+    An island is a group of '1's connected horizontally or vertically.
+    '0' represents water.
+    
+    Args:
+        grid: A 2D list where each cell is either '1' (land) or '0' (water)
+    
+    Your solution should print the number of islands to stdout
+    """
+    # ============================================
+    # YOUR CODE HERE
+    # ============================================
+    
     if not grid or not grid[0]:
         print(0)
         return
@@ -22,12 +41,15 @@ def main(grid):
                 islands += 1
     
     print(islands)
-
     
+    # ============================================
+    # END YOUR CODE
+    # ============================================
 
 
-
-# DO NOT MODIFY
+# ============================================
+# DO NOT MODIFY BELOW THIS LINE
+# ============================================
 if __name__ == "__main__":
     import sys
     data = sys.stdin.read().strip()

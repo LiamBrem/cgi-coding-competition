@@ -1,4 +1,4 @@
-# Question 10: Maximum Score With No Adjacent Picks
+# Question 10: Maximum Score With No Adjacent Picks - 50 Points
 
 Congratulations! You've made it to the final challenge. All your work has led to this moment.
 

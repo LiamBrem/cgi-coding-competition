@@ -1,6 +1,7 @@
-### ------------------------------- ###
-### ----- YOUR CODE AT BOTTOM ----- ###
-### ------------------------------- ###
+# ============================================
+# DO NOT MODIFY: TreeNode class and parsing helpers
+# These are provided for you to use
+# ============================================
 
 class TreeNode:
     """
@@ -99,13 +100,30 @@ def _parse_tree(s: str) -> TreeNode:
 
 
 
-### ========== YOUR CODE BELOW ========== ###
-"""
-N[3,7,11](N[1,2](L[1])(L[1]))(L[2])
-"""
+# ============================================
+# IMPLEMENT YOUR SOLUTION IN THE main() FUNCTION
+# ============================================
 
 def main(root):
+    """
+    Evaluate the root node of a tree structure.
+    
+    Tree Node Structure:
+    - Leaf nodes: Return the first (and only) element in their val array
+    - Internal nodes: Sum all children's return values, then return the INDEX
+                     of that sum in the node's val array
+    
+    Args:
+        root: A TreeNode object with:
+              - root.val: A list of integers
+              - root.children: A list of TreeNode children
+              - root.evaluate(): Pre-implemented method (you can use or reimplement)
+    
+    Your solution should print the result to stdout
+    """
+    # ============================================
     # YOUR CODE HERE
+    # ============================================
 
     def dfs(node):
         if not node.children:
@@ -119,14 +137,17 @@ def main(root):
 
 
     print(dfs(root))
+    
+    # ============================================
+    # END YOUR CODE
+    # ============================================
 
 
-    # PRINT OUTPUT
-
-
+# ============================================
+# DO NOT MODIFY BELOW THIS LINE
+# ============================================
 if __name__ == "__main__":
     import sys
     data = sys.stdin.read().strip()
     root = _parse_tree(data)
     main(root)
-    

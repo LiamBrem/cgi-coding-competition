@@ -1,14 +1,34 @@
 import sys
 
-# R = rock, P = paper, S = scissors
-# guide is in the format: ["R", "R", "P", "P", scissors", "R"]
-# where if the opponent plays move guide[i], you play the move guide[i + 1]
-# if the opponent plays "R", you should play "R"
-# if the opponent plays scissors, you should play "R"
-# moves is in the format: ["R", "P", "S", "R", "R"]
-# score: 1 if you win, 0 if you tie, -1 if you lose
+# ============================================
+# IMPLEMENT YOUR SOLUTION IN THE main() FUNCTION
+# ============================================
+
 def main(guide, moves):
+    """
+    Calculate your total score in Rock-Paper-Scissors based on a strategy guide.
+    
+    Game Rules:
+    - R (Rock) beats S (Scissors)
+    - S (Scissors) beats P (Paper)
+    - P (Paper) beats R (Rock)
+    
+    Scoring:
+    - Win: 6 points
+    - Draw: 3 points
+    - Loss: 1 point
+    
+    Args:
+        guide: List of 6 strings representing 3 pairs [opponent_move, your_response]
+               e.g., ["R", "P", "P", "S", "S", "R"]
+        moves: List of strings representing opponent's move sequence
+               e.g., ["R", "P", "S"]
+    
+    Your solution should print the result to stdout using print()
+    """
+    # ============================================
     # YOUR CODE HERE
+    # ============================================
     
     m = {}
     for i in range(0, len(guide) - 1, 2):
@@ -32,11 +52,16 @@ def main(guide, moves):
             elif m[move] == "P":
                 score -= 1
 
-    # PRINT THE RESULT
     print(score)
+    
+    # ============================================
+    # END YOUR CODE
+    # ============================================
 
 
-
+# ============================================
+# DO NOT MODIFY BELOW THIS LINE
+# ============================================
 if __name__ == "__main__":
     data = sys.stdin.read().strip()
     words = data.split()

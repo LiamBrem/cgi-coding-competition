@@ -1,4 +1,4 @@
-# Question 4: Encryption Key Recovery
+# Question 4: Encryption Key Recovery - 20 Points
 
 Your defensive strategies are working well! However, a new challenge has emerged. During the chaos of the cyber incident, two departments independently submitted halves of a critical encryption key needed to secure the client's most sensitive data.
 

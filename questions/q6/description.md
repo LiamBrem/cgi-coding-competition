@@ -1,4 +1,4 @@
-# Question 6: Predict the Winner
+# Question 6: Predict the Winner - 30 Points
 
 The encryption keys have been validated and your security contributions are being noticed across CGI. Now leadership needs your strategic expertise during the crisis.
 

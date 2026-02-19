@@ -1,4 +1,4 @@
-# Question 2: Signature Detection
+# Question 2: Signature Detection - 10 points
 
 Good work on the transaction verification! Your manager is impressed. Now there's a more urgent issue: suspicious log files are showing up across multiple systems with mixed-case messages. The security team suspects attackers are embedding a signature pattern to communicate between compromised servers.
 

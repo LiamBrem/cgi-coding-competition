@@ -1,4 +1,4 @@
-# Question 7: Performance Threshold Analysis
+# Question 7: Performance Threshold Analysis - 35 Points
 
 Your strategic analysis for Team A was spot-on! Now CGI needs your help with a global infrastructure assessment. Each CGI office around the world has systems built on dependent sub-systems arranged in a hierarchical tree structure.
 
