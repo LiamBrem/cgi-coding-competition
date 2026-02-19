@@ -1,5 +1,35 @@
 # CGI Coding Competition
 
+
+### GI: Operation Trusted Outcomes
+
+You are a newly recruited CGI Partner on your first week inside the Global Digital Response Team.
+
+CGI operates across 400+ locations worldwide, delivering insights-driven IT solutions. But today, something unusual is happening.
+
+A coordinated cyber event — codenamed “Shadow ROI” — is attempting to disrupt CGI client systems across multiple industries. Financial services, healthcare, logistics, energy — all sectors are at risk.
+
+The leadership team activates an internal simulation:
+
+“To protect our clients, you must demonstrate mastery of data, logic, and resilience. Each system you stabilize unlocks the next.”
+
+Each problem represents a real-world CGI challenge:
+
+Data validation
+
+Log analysis
+
+Decision modeling
+
+Infrastructure protection
+
+Strategic optimization
+
+By solving each task, students “restore” part of CGI’s global digital infrastructure.
+
+
+---
+
 ## Running with Docker
 
 > if you don't have docker install it [here](https://docs.docker.com/get-started/get-docker/)

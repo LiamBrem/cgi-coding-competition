@@ -5,7 +5,7 @@ def main(input_string):
 
     res = 0
     for i in range(len(input_string) - 2):
-        if input_string[i: i+3] == "cgi":
+        if input_string[i: i+3].lower() == "cgi":
             res += 1
     
     print(res)
