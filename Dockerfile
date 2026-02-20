@@ -17,8 +17,8 @@ WORKDIR /app
 COPY grader/ ./grader/
 RUN cd grader && make clean && CXX=g++ make
 
-# Copy questions directory
-COPY questions/ ./questions/
+# Note: questions directory will be mounted at runtime
+# This allows users to run the grader without rebuilding the image
 
 # Set up entry point
 WORKDIR /app/grader
