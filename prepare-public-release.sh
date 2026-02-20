@@ -19,13 +19,13 @@ cp run-grader-public.bat "$PUBLIC_DIR/"
 cp run-grader-public.ps1 "$PUBLIC_DIR/"
 
 echo "Copying README..."
-cp README-public.md "$PUBLIC_DIR/README.md"
+cp README.md "$PUBLIC_DIR/README.md"
 
 echo "Copying .dockerignore (optional)..."
 [ -f .dockerignore ] && cp .dockerignore "$PUBLIC_DIR/" || true
 
 echo ""
-echo "✅ Public release created at: $PUBLIC_DIR"
+echo "Public release created at: $PUBLIC_DIR"
 echo ""
 echo "Next steps:"
 echo "1. Update IMAGE_NAME in the public run scripts with your Docker Hub username"

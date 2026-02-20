@@ -26,30 +26,25 @@ By solving each task, you'll restore part of CGI’s global digital infrastructu
 
 ---
 
-## Getting the questions ready to go:
+## Getting Started
+
+### Running in Codespaces:
+
+Click the green codespace button in the top right corner and create a new codespace.
+
+### Running Locally:
 
 > if you don't have docker install it [here](https://docs.docker.com/get-started/get-docker/)
 
 **Clone the repo:**
 ```bash
-git clone https://github.com/LiamBrem/cgi-coding-competition (<- CHANGE BY EVENT)
+git clone https://github.com/LiamBrem/cgi-coding-competition-public
 ```
 
 **CD into the folder:**
 ```bash
 cd cgi-coding-competition
 ```
-Now you're ready to **START CODING!**
-
-## How does it work 🤨
-
-- Each question has it's own folder (as you can see if you open up the 'questions' folder).
-- And there's already some files for you to write your code in!
-- Open up either the `Solution.java` or `solution.py` <- this is where your code goes.
-- There's also a `description.md` that explains each problem...because you have to know what to do, obviously.
-- When you think your solution is right, you're going to run one of the commands below vvv
-- If you pass, you'll get a super special secretive code which is what you'll put in the google form and is how you'll be scored
-
 
 **Build the image:**
 ```bash
@@ -61,22 +56,46 @@ docker build -t cgi-grader .
 docker run --rm cgi-grader --question 1 --lang python
 ```
 
-**Or use the helper script:**
-> This builds and runs the grader at the same time!
+Or use the helper script below ⬇️
 
-Linux/macOS:
+Now you're ready to **START CODING!**
+
+## How does it work 🤨
+
+- Each question has it's own folder (as you can see if you open up the 'questions' folder).
+- And there's already some files for you to write your code in!
+- Open up either the `Solution.java` or `solution.py` <- this is where your code goes.
+- There's also a `description.md` that explains each problem...because you have to know what to do, obviously.
+- When you think your solution is right, you're going to run one of the commands below vvv
+- If you pass, you'll get a super special secretive code which is what you'll put in the google form and is how you'll be scored
+
+## Running your code
+
+**CODESPACES**/Linux/macOS:
 ```bash
-./run-grader.sh 1 python
+./run-grader-public.sh <question_number> <language>
 ```
 
 Windows (Command Prompt):
 ```cmd
-run-grader.bat 1 python
+run-grader-public.bat <question_number> <language>
 ```
 
 Windows (PowerShell):
 ```powershell
-.\run-grader.ps1 1 python
+.\run-grader-public.ps1 <question_number> <language>
+```
+
+**Examples:**
+```bash
+# Test question 1 with Python
+./run-grader-public.sh 1 python
+
+# Test question 2 with Java
+./run-grader-public.sh 2 java
+
+# Test question 5 with Python
+./run-grader-public.sh 5 python
 ```
 
 ## Example Output
@@ -90,7 +109,8 @@ Score: 8/10
 Code: apbdjhnasopiufh
 ```
 
+Fix your code and run again until all tests pass!
 ---
 
-### [HERE]() is the form to submit all of your codes
+### [Submit Your Codes Here]()
 ### Good Luck!
